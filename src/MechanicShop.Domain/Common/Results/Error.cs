@@ -10,7 +10,7 @@ public readonly record struct Error
   }
   public string Code { get; }
   public string Description { get; }
-  private ErrorKind Type { get; }
+  public ErrorKind Type { get; }
 
   public static Error Failure(string code = nameof(Failure), string description = "General Failure")
     => new Error(code, description, ErrorKind.Failure);

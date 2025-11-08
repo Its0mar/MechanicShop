@@ -77,7 +77,7 @@ public sealed class Result<TValue> : IResult<TValue>
     }
 
     public TNextValue Match<TNextValue>(Func<TValue, TNextValue> onValue, Func<List<Error>, TNextValue> onError)
-        => IsSuccess ? onValue(Value!) : onError(Errors); 
+        => IsSuccess ? onValue(Value!) : onError(Errors);
 
     public static implicit operator Result<TValue>(TValue value)
         => new(value);
