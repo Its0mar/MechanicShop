@@ -16,6 +16,7 @@ public sealed class RepairTask : AuditableEntity
     public decimal TotalCost => LaborCost + Parts.Sum(p => p.Cost * p.Quantity);
 
 #pragma warning disable CS8618
+
     private RepairTask()
     { }
 
@@ -37,6 +38,18 @@ public sealed class RepairTask : AuditableEntity
         return new RepairTask(id, name.Trim(), laborCost, estimatedDurationInMins, parts);
     }
 
+    public Result<Updated> Update(string name, decimal laborCost, RepairDurationInMinutes estimatedDurationInMins)
+    {
+        var validationResult = Validate(name, laborCost, estimatedDurationInMins);
+        if (validationResult is not null) return validationResult;
+
+        Name = name.Trim();
+        LaborCost = laborCost;
+        EstimatedDurationInMins = estimatedDurationInMins;
+
+        return Result.Updated;
+    }
+    
     public Result<Updated> UpsertParts(List<Part> incomingParts)
     {
         _parts.RemoveAll(existing => incomingParts.All(p => p.Id != existing.Id));
@@ -60,19 +73,7 @@ public sealed class RepairTask : AuditableEntity
 
         return Result.Updated;
     }
-
-    public Result<Updated> Update(string name, decimal laborCost, RepairDurationInMinutes estimatedDurationInMins)
-    {
-        var validationResult = Validate(name, laborCost, estimatedDurationInMins);
-        if (validationResult is not null) return validationResult;
-
-        Name = name.Trim();
-        LaborCost = laborCost;
-        EstimatedDurationInMins = estimatedDurationInMins;
-
-        return Result.Updated;
-    }
-
+    
     private static Error? Validate(string name, decimal laborCost, RepairDurationInMinutes estimatedDurationInMins)
     {
         if (string.IsNullOrWhiteSpace(name))
