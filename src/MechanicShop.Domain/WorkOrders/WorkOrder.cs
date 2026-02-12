@@ -3,6 +3,7 @@ using MechanicShop.Domain.Common.Results;
 using MechanicShop.Domain.Customers.Vehicles;
 using MechanicShop.Domain.Employees;
 using MechanicShop.Domain.RepairTasks;
+using MechanicShop.Domain.WorkOrders.Billing;
 using MechanicShop.Domain.WorkOrders.Enums;
 
 namespace MechanicShop.Domain.WorkOrders;
@@ -17,7 +18,7 @@ public sealed class WorkOrder : AuditableEntity
     public WorkOrderState State { get; private set; }
     public Employee? Labor { get; set; }
     public Vehicle? Vehicle { get; set; }
-    //public Invoice? Invoice { get; set; }
+    public Invoice? Invoice { get; set; }
     public decimal? Discount { get; private set; }
     public decimal? Tax { get; private set; }
     public decimal? TotalPartsCost => _repairTasks.SelectMany(rt => rt.Parts).Sum(p => p.Cost);
