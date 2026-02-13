@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace MechanicShop.Application.Features.Identity.Queries.GetUserInfo;
 
-public class GetUserByIdQueryHanlder(ILogger<GetUserByIdQueryHanlder> logger, IIdentityService identityService) : IRequestHandler<GetUserByIdQuery, Result<AppUserDto>>
+public class GetUserByIdQueryHandler(ILogger<GetUserByIdQueryHandler> logger, IIdentityService identityService) : IRequestHandler<GetUserByIdQuery, Result<AppUserDto>>
 {
-    private readonly ILogger<GetUserByIdQueryHanlder> _logger = logger;
+    private readonly ILogger<GetUserByIdQueryHandler> _logger = logger;
     private readonly IIdentityService _identityService = identityService;
     public async Task<Result<AppUserDto>> Handle(GetUserByIdQuery request, CancellationToken ct)
     {
