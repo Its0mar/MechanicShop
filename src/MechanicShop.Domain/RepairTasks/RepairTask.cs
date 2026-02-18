@@ -12,7 +12,7 @@ public sealed class RepairTask : AuditableEntity
     public RepairDurationInMinutes EstimatedDurationInMins {get; private set;}
     private readonly List<Part> _parts = [];
     public IEnumerable<Part> Parts => _parts.AsReadOnly();
-    public decimal TotalCost => LaborCost + Parts.Sum(p => p.Cost * p.Qunatity);
+    public decimal TotalCost => LaborCost + Parts.Sum(p => p.Cost * p.Quantity);
 
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -75,7 +75,7 @@ public sealed class RepairTask : AuditableEntity
             
             else
             {
-                var updateResult = existing.Update(inc.Name, inc.Cost, inc.Qunatity);
+                var updateResult = existing.Update(inc.Name, inc.Cost, inc.Quantity);
 
                 if (updateResult.IsError)
                 {

@@ -8,7 +8,7 @@ public sealed class Part : AuditableEntity
 {
     public string Name {get; private set;}
     public decimal Cost {get; private set;}
-    public int Qunatity {get; private set;}
+    public int Quantity {get; private set;}
 
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -20,7 +20,7 @@ public sealed class Part : AuditableEntity
     {
         Name = name;
         Cost = cost;
-        Qunatity = quantity;
+        Quantity = quantity;
     }
 
     public static Result<Part> Create(Guid id, string name, decimal cost, int quantity)
@@ -46,7 +46,7 @@ public sealed class Part : AuditableEntity
 
         Name = name.Trim();
         Cost = cost;
-        Qunatity = quantity;
+        Quantity = quantity;
 
         return Result.Updated;      
     }
