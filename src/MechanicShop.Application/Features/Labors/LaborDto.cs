@@ -1,6 +1,6 @@
 namespace MechanicShop.Application.Features.Labors;
 
-public class LabordDto
+public class LaborDto
 {
     public Guid LabordId {get; set;}
     public string Name {get; set;} = string.Empty;
